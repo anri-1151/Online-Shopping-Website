@@ -1,0 +1,109 @@
+//user table in mongoDb
+{
+    _id:'1',
+	name:'anri',
+	surname:'morchiladze',
+	id_number:'12345678910',
+	mobile:'599123456',
+	email:'asa@example.com',
+	username:'anri',
+	password:'anri123',
+	orders: [
+		{
+		    order_date:'12/10/2015',
+		    products: [
+			    {
+					name:'lenovo',
+					price:'1000',
+					quantity:'1'
+				},
+				{
+					name:'ipad',
+					price:'500',
+					quantity:'2'
+				}
+			];
+			card_number:'1234 1234 1234 1234',
+			expire_date:'03/15',
+			cvc:'123',
+			total:'2000',
+			address:'tbilisi',
+			status:'not delivery'
+		},
+		{
+		    order_date:'14/10/2015',
+		    products: [
+			    {
+					name:'nokia',
+					price:'1000',
+					quantity:'1'
+				}
+			];
+			card_number:'1234 1234 1234 1234',
+			expire_date:'03/15',
+			cvc:'123',
+			total:'1000',
+			address:'tbilisi',
+			status:'ok'
+		}
+	];
+}
+
+//product table 
+
+{
+    _id: '1',
+	product_name: 'lenovo',
+	description: 'laptop',
+	image: 'img/surati1.jpg',
+	category: 'laptop',
+	product_total: '5',
+	product_available: '4',
+	product_price:'1000',
+	//???
+	product_bought_by: [
+		{
+			"user_id":1
+		}
+	]	
+}
+
+//category table
+{
+	_id: '1',
+	category:'laptop'
+}
+
+//auto_incrementebi
+
+//user
+function getNextUser(sequenceName){
+   var sequenceDocument = db.user_counters.findAndModify(
+      {
+         query:{_id: sequenceName },
+         update: {$inc:{sequence_value:1}},
+         new:true
+      });
+   return sequenceDocument.sequence_value;
+}
+
+db.user_counters.insert({_id:"userId",sequence_value:0})
+
+function getNextProduct(sequenceName){
+   var sequenceDocument = db.product_counters.findAndModify(
+      {
+         query:{_id: sequenceName },
+         update: {$inc:{sequence_value:1}},
+         new:true
+      });
+   return sequenceDocument.sequence_value;
+}
+
+db.product_counters.insert({_id:"productId",sequence_value:0})
+
+//magaliti
+_id":getNextProduct("productId")
+
+
+
+    

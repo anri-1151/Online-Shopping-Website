@@ -1,0 +1,81 @@
+ <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Categories</p>
+                <div class="list-group">
+				    <% categs.forEach(function(categ) { %>
+						<a href="/category?cat=<%=categ.category %>" class="list-group-item"><%= categ.category %></a>
+					<% }); %>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <!--<div class="row carousel-holder">
+                
+				<div class="row">
+					<div class="col-sm-4 col-lg-4 col-md-4">
+						<div class="thumbnail">
+							<div class="option">
+						</div>
+				</div>-->
+                   
+                <div class="row">
+				    <% productebi.forEach(function(prod) {%>
+						<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="thumbnail">
+								<img src="<%= prod.images[0] %>" alt="" width="320px" height="150px">
+								<div class="caption">
+									<h4 class="pull-right"><%= prod.product_price %></h4>
+									<h4><a href="/product-details?product=<%= prod._id %>"><%= prod.product_name %></a></h4>
+									<p>
+										Category :<%= prod.category %>
+										<br>
+										<a href="/product-details?product=<%= prod._id %>">Details</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					<% }); %>
+					
+                   
+
+                </div>
+				<center>		
+	        <% if (pageCount > 1) { %>
+	        <ul class="pagination">
+	            <% if (currentPage > 1) { %>
+	                <li><a href="/category?cat=<%= category %>&page=1">&laquo;</a></li>
+	            <% } %>
+	            <% var i = 1;
+	            if (currentPage > 5) {
+	                i = +currentPage - 4;
+	            } %>
+	            <% if (i !== 1) { %>
+	                <li class="disabled"><a href="#">...</a></li>
+	            <% } %>
+	            <% for (i; i<=pageCount; i++) { %>
+	                <% if (currentPage == i) { %>
+	                    <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+	                <% } else { %>
+	                    <li><a href="/category?cat=<%= category %>&page=<%= i %>"><%= i %></a></li>
+	                <% } %>
+	                <% if (i == (+currentPage + 4)) { %>
+	                    <li class="disabled"><a href="#">...</a></li>
+	                <% break; } %>
+	            <% } %>
+	            <% if (currentPage != pageCount) { %>
+	                <li><a href="/category?cat=<%= category %>&page=<%= pageCount %>">&raquo;</a></li>
+	            <% } %>
+	        </ul>
+	    <% } %>
+		</center>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
